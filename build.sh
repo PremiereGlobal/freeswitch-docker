@@ -2,8 +2,10 @@
 
 docker build -t rt-freeswitch:latest .
 
-FS_TMP=$(docker run --rm -it readytalk/rt-freeswitch:latest /usr/bin/freeswitch -version)
+FS_TMP=$(docker run --rm --entrypoint="" -it readytalk/rt-freeswitch:latest /usr/bin/freeswitch -version 2> /dev/null)
+echo "--------------==="
 echo $FS_TMP
+echo "--------------==="
 
 FS_V_A=(${FS_TMP[@]})
 FS_VERSION=${FS_V_A[2]::-14}
