@@ -1,0 +1,12 @@
+<include>
+  <context name="sip-dialplan">
+    <extension name="sip-dialplan">
+      <condition field="${sip_to_host}" expression="^.+">
+        <action application="conference" data="${sip_to_host}"/>
+        <anti-action application="conference" data="---Public"/>
+      </condition>
+    </extension>
+
+  </context>
+</include>
+
