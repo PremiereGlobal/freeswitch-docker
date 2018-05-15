@@ -1,0 +1,27 @@
+<configuration name="conference.conf" description="Audio Conference">
+  <advertise>
+  </advertise>
+
+  <caller-controls>
+    <group name="default">
+    </group>
+  </caller-controls>
+
+  <profiles>
+    <profile name="default">
+      <param name="domain" value="$${domain}"/>
+      <param name="rate" value="48000"/>
+      <param name="interval" value="20"/>
+      <param name="energy-level" value="100"/>
+      <param name="enter-sound" value="tone_stream://%(200,0,500,600,700)"/>
+      <param name="exit-sound" value="tone_stream://%(500,0,300,200,100,50,25)"/>
+      <param name="kicked-sound" value="conference/conf-kicked.wav"/>
+      <param name="locked-sound" value="conference/conf-locked.wav"/>
+      <param name="caller-id-name" value="$${outbound_caller_name}"/>
+      <param name="caller-id-number" value="$${outbound_caller_id}"/>
+      <param name="comfort-noise" value="false"/>
+    </profile>
+
+  </profiles>
+</configuration>
+
