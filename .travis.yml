@@ -1,0 +1,19 @@
+sudo: required
+dist: bionic
+language: python
+services:
+- docker
+env:
+  global:
+  - IMAGE_NAME=freeswitch-docker
+script:
+- "./build.sh"
+notifications:
+  slack:
+    template:
+    - Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch}>
+      by %{author} %{result} in %{duration}
+    - 'Image Name: readytalk/%{IMAGE_NAME}:3.2.%{build_number}-%{commit}'
+    on_success: always
+    on_failure: always
+    rooms:
