@@ -26,8 +26,8 @@ echo "-----------------------"
 
 if [[ ${TRAVIS} && "${TRAVIS_BRANCH}" == "master" && -n $DOCKER_USERNAME && -n $DOCKER_PASSWORD ]]; then
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  docker push readytalk/rt-freeswitch:${KAM_VER}
-  docker push readytalk/rt-freeswitch:${KAM_A[0]}.${KAM_A[1]}
+  docker push readytalk/rt-freeswitch:${FS_VERSION}
+  docker push readytalk/rt-freeswitch:${FS_MM}
   docker push readytalk/rt-freeswitch:latest
 fi
 
