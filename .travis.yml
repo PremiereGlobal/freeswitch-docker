@@ -6,6 +6,8 @@ services:
 env:
   global:
   - IMAGE_NAME=freeswitch-docker
+  - secure: YEhyJ+7DHYjlNbvjD1X9BFWPclTlh67xH4V90/W3hqiOxeo707GGSGX6bZWb7YCGWzU6AfkFsNIhQU5D6ANizQ3h1pCndd8V6qIg3toRFpf6yR/CWiuPHHhM20fP7xQMyh+Oh2rv89D2s7farMbJ6sDAp40uuOLZkvjSyMNngGQT/uNOAtWNNYSkAua8yGnc57J0knflRTvA//9RueCyJPIC/q3+oFvRG27SVFN47D3M72AXWMN1PF2WTYRg75LWgLTvdpB9fipekgzbPGWyOWJAb7ZZGajNVcJVvICU/2f7Oz5rfSGacg1wEPe+FIGPq1yhMgoSuH1bPEbJgG4Fvh5JcETTml8PRPKQUucVOeToCb66M66G95+OeVaJD3WOBs/XB3MohUXWqbs2t4g+Bdcjf5k+PY+n2Shm8xNqiZPQlgrPEbkAefFKlgbvmepSUyWBLJf2gNRp6819W/eaCuCMfu3Ccq/rtkK0+kF8bknDD8RgftnJ+fWtszkUU9uiIztCPgdjcAONcony0apnq2uUj0VK3lU3X804l+XbnYQsoE9GLixa4gyqM31Fy6GSZJshkRKV8jI4BaiVsRsjWY7DTiCrPi+QZcb1relfYnMRGil5FBKFOXFfZmK9rRdCwhtvK0+1tRXqlLaUnV3IJcNBwS8EKYE4W3hoUjIhYFo=
+  - secure: RjydiEQu0YVs0eEMDbiq/dpPcemBXbeL0wNo9LCQFY8zimXfqNHDUCylbnQ+oJ77SWduI3139RMWTNxUzOEVsKgZcBJqCKScbnL5+bwahZsnaSVzc1Canl13L/xZt/Zw1QD9ga+dOnM6ehamD3JZNafmP3vepD1O4jUkOInxNK6/CurnQmqsghrI8cMZ6CuATdtpmhdorKbySLF4XB80Jnk1JJJlz5lXdpvQfR+0mHbi+nhuS2E78MM1A7q6dV10hOgtN9fz42QU4988RrfV39BfRFqyJq7NkB88zvS0usiskedUsEVgOJaSILhEaxfKe56AqF89kj9fYxfUI/WsdolK/EGWz5lBo5QVFqojwbOvnHQRzC+791ykNd2l/kgajEmoMFezzPw2Z4BpOAfuSvbRwUCelEVoeFYm0yh15Q9QHot+pd5EY4QryKYjmdRX5X+YV2qYlhyp9fFrS4HLaP99FeO2lnAXEaIO+5lxCUahJXZT+qpoFJltBA8xyeBKokA65EjLy/8baWi8Y8yMXO9sMS7iRQHmFUwPRjkbYiu6ebWKrfksW1iYD508Me6nMhsAKGVAXcVMhJWLiXKFA66iJXZiinnNa7biQmUFgrUj8jR4SdyUQvmb5VSxBua3m2iuaGX8Ko2/vnkeYqVa/ziJKY5UuQkdt2ffXB8jEYU=
 script:
 - "./build.sh"
 notifications:
@@ -16,4 +18,4 @@ notifications:
     - 'Image Name: readytalk/%{IMAGE_NAME}:3.2.%{build_number}-%{commit}'
     on_success: always
     on_failure: always
-    rooms:
+    rooms: 
