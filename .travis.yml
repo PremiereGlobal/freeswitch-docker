@@ -1,7 +1,5 @@
 sudo: required
-dist: bionic
-services:
-  - docker
+dist: trusty
 language: python
 services:
 - docker
