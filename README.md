@@ -1,4 +1,7 @@
-#Docker Freeswitch Image
+[![Build Status](https://travis-ci.org/ReadyTalk/kamailio-docker.svg?branch=master)](https://travis-ci.org/ReadyTalk/kamailio-docker)
+
+# Docker Freeswitch Image
+
 A simple Docker container for running freeswitch.  The default settings will allow connections where the sip from user domain name will all be bridged into the same conference.
 
 Any environment variable starting with FS_ will be passed into freeswitch automatically.
@@ -18,19 +21,19 @@ There are a few defaulted FS_* config variables for the default config:
 
 No ports are forwarded by default so any ports you want open to the host you must set on the docker run command.
 
-##Example build:
+## Example build:
 
 ```
 docker build -t fsd .
 ```
 
-##Example run:
+## Example run:
 
 ```
 docker run --rm -it -p 7480:7480 fsd:latest
 ```
 
-##Example changing port and password:
+## Example changing port and password:
 
 ```
 docker run --rm -it -p 5480:5480 -e "FS_WS_PORT=5480" -e "FS_XMLRPC_PASSWORD=TEST" fsd:latest
