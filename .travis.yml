@@ -18,4 +18,5 @@ notifications:
     - 'Image Name: readytalk/%{IMAGE_NAME}:3.2.%{build_number}-%{commit}'
     on_success: always
     on_failure: always
-    rooms: 
+    rooms:
+      secure: bw3b+0W/8D9SQm35WyeqQh8ow47DB8wpzYYP67tvhBxnYJPzbPRijYXQPrYTCgQRAJaYABsa8gwR0FLk6HlLeaHpSjWisSHfDdaZT+miuoppJTPNcfexHcqSWC+MYb3nB3tM2VRi3UdFcd4RwNoPPMsPpXzG0X1+jnt35OylfWGO3D/mfaBa/w7xqHBWbMXTiH818cLd48xIzfW1pOSme/5ZahlvP3tZQER5SNPiHMQ16dhwugIDxEDFbGVAd6U5ecG2CUYjBfiZ+UiCA+n9fuIwSQulh05MQ5jKKUSyb62dn4gr+X5krJfLOCNKaF3N5lotUT+LrAIZg63MU63GDUArWTvq4CAX1JAqzMPVB0jUh4FBEketzghaQKZoovEuDAyQPbNm2JrkKsMteZt4w6PMC3RPwSm9N2whnfrJQI/jgZXwbU34/Tp7IO9fC7xAlCPt+PAjFvtXRkh6WQq5YL/AuRci0Ym77Jwv5nlssuimnIz75XTSmG02yLgmnwuJugo6VtEtf+AJnld6ehUqLUCq66NKwRnOesleWziiGgaJ3zeGrYP8bb1f7Y4K3sKAOq1Ivdv/pcetQYScibjdtYjix/OkVCuwQbFOBBqNXD669k0cbBx7hJDMjRnw0DmFdC3vcuzAGS/lrNO1TVmjWSC8JaXu/25AitD+AwZ9M9I=
