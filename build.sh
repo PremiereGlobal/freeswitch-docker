@@ -1,8 +1,8 @@
 #!/bin/bash
 
-docker build -t docker-freeswitch:latest .
+docker build -t freeswitch-docker:latest .
 
-FS_TMP=$(docker run --rm --entrypoint="" -it docker-freeswitch:latest /usr/bin/freeswitch -version 2> /dev/null)
+FS_TMP=$(docker run --rm --entrypoint="" -it freeswitch-docker:latest /usr/bin/freeswitch -version 2> /dev/null)
 echo "--------------==="
 echo $FS_TMP
 echo "--------------==="
@@ -15,19 +15,19 @@ FS_A=(${FS_VERSION//./ })
 FS_A=(${FS_A[@]})
 FS_MM="${FS_A[0]}.${FS_A[1]}"
 
-docker tag docker-freeswitch:latest readytalk/docker-freeswitch:${FS_VERSION}
-docker tag docker-freeswitch:latest readytalk/docker-freeswitch:${FS_A[0]}.${FS_A[1]}
-docker tag docker-freeswitch:latest readytalk/docker-freeswitch:latest
+docker tag freeswitch-docker:latest readytalk/freeswitch-docker:${FS_VERSION}
+docker tag freeswitch-docker:latest readytalk/freeswitch-docker:${FS_A[0]}.${FS_A[1]}
+docker tag freeswitch-docker:latest readytalk/freeswitch-docker:latest
 echo "-----------------------"
-echo "Saved Tag \"docker-freeswitch:${FS_VERSION}\""
-echo "Saved Tag \"docker-freeswitch:${FS_MM}\""
-echo "Saved Tag \"docker-freeswitch:latest\""
+echo "Saved Tag \"freeswitch-docker:${FS_VERSION}\""
+echo "Saved Tag \"freeswitch-docker:${FS_MM}\""
+echo "Saved Tag \"freeswitch-docker:latest\""
 echo "-----------------------"
 
 if [[ ${TRAVIS} && "${TRAVIS_BRANCH}" == "master" && -n $DOCKER_USERNAME && -n $DOCKER_PASSWORD ]]; then
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  docker push readytalk/docker-freeswitch:${FS_VERSION}
-  docker push readytalk/docker-freeswitch:${FS_MM}
-  docker push readytalk/docker-freeswitch:latest
+  docker push readytalk/freeswitch-docker:${FS_VERSION}
+  docker push readytalk/freeswitch-docker:${FS_MM}
+  docker push readytalk/freeswitch-docker:latest
 fi
 
