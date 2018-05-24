@@ -32,6 +32,7 @@ COPY configs/sip-dialplan.xml /etc/freeswitch/dialplan/
 COPY configs/conference.conf.xml /etc/freeswitch/autoload_configs/
 #add run.sh
 COPY run.sh /
+RUN touch /env.sh
 
 
 ENTRYPOINT ["/run.sh"]

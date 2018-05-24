@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/usr/bin/dumb-init /bin/bash
 
+. /env.sh
 
 DEFAULT_FS_EVENT_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 DEFAULT_FS_DEFAULT_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
@@ -32,4 +33,4 @@ for var in $(compgen -e); do
     echo "<X-PRE-PROCESS cmd=\"set\" data=\"${var}=${!var}\"/>" > "/etc/freeswitch/envVars/${var}.xml"
   fi
 done
-exec -c ${@}
+exec "${@}"
