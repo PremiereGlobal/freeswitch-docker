@@ -31,7 +31,7 @@
     <param name="ext-sip-ip" value="stun:stun.freeswitch.org"/>
     <param name="rtp-timeout-sec" value="30"/>
     <param name="rtp-hold-timeout-sec" value="1800"/>
-    <param name="sip-port" value=":$${FS_SIP_PORT}"/>
+    <param name="sip-port" value="$${FS_SIP_PORT}"/>
     <param name="ws-binding" value=":$${FS_WS_PORT}"/>
     <param name="tls" value="true"/>
     <param name="tls-only" value="false"/>
