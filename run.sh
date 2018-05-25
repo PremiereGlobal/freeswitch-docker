@@ -30,7 +30,7 @@ done
 echo -e "[default]\npassword=${DEFAULT_FS_EVENT_PASSWORD}\nport=${DEFAULT_FS_EVENT_PORT}\n" > /etc/fs_cli.conf
 
 
-for var in $(compgen -e); do
+for var in ${!FS_*}; do
   if [[ $var == FS_* ]]; then
     echo "<X-PRE-PROCESS cmd=\"set\" data=\"${var}=${!var}\"/>" > "/etc/freeswitch/envVars/${var}.xml"
   fi
