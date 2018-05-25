@@ -10,6 +10,8 @@ DEFAULT_FS_SIP_PORT=5060
 DEFAULT_FS_TLS_PORT=5061
 DEFAULT_FS_EVENT_PORT=8020
 DEFAULT_FS_XMLRPC_PORT=8080
+DEFAULT_FS_EXT_RTP_IP="$\\\${local_ip_v4}"
+DEFAULT_FS_EXT_SIP_IP="$\\\${local_ip_v4}"
 DEFAULT_FS_XMLRPC_USER=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 DEFAULT_FS_XMLRPC_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 

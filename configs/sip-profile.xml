@@ -27,8 +27,8 @@
     <param name="inbound-zrtp-passthru" value="false"/>
     <param name="rtp-ip" value="$${local_ip_v4}"/>
     <param name="sip-ip" value="$${local_ip_v4}"/>
-    <param name="ext-rtp-ip" value="stun:stun.freeswitch.org"/>
-    <param name="ext-sip-ip" value="stun:stun.freeswitch.org"/>
+    <param name="ext-rtp-ip" value="${FS_EXT_RTP_IP}"/>
+    <param name="ext-sip-ip" value="${FS_EXT_SIP_IP}"/>
     <param name="rtp-timeout-sec" value="30"/>
     <param name="rtp-hold-timeout-sec" value="1800"/>
     <param name="sip-port" value="$${FS_SIP_PORT}"/>
