@@ -14,6 +14,8 @@ DEFAULT_FS_EXT_RTP_IP="$\\\${local_ip_v4}"
 DEFAULT_FS_EXT_SIP_IP="$\\\${local_ip_v4}"
 DEFAULT_FS_XMLRPC_USER=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 DEFAULT_FS_XMLRPC_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+DEFAULT_FS_SIP_CAPTURE="no"
+DEFAULT_FS_SIP_CAPTURE_SERVER="false"
 
 rm -rf /etc/freeswitch/envVars/*
 for var in ${!DEFAULT_FS*}; do
@@ -35,4 +37,9 @@ for var in ${!FS_*}; do
     echo "<X-PRE-PROCESS cmd=\"set\" data=\"${var}=${!var}\"/>" > "/etc/freeswitch/envVars/${var}.xml"
   fi
 done
+
+if [[ $FS_SIP_CAPTURE_SERVER != "false" ]]; then
+  sed -i -e 's/.*<param name="capture-server".*/<param name="capture-server" value="$${FS_SIP_CAPTURE_SERVER}"\/>/g' 
+fi
+
 exec "${@}"
