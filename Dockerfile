@@ -36,4 +36,4 @@ RUN touch /env.sh
 
 
 ENTRYPOINT ["/run.sh"]
-CMD ["/usr/bin/freeswitch", "-nonat", "-nf"]
+CMD ["/usr/bin/freeswitch", "-nonat", "-nf", "-nc"]

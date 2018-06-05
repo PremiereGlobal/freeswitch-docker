@@ -39,7 +39,7 @@ for var in ${!FS_*}; do
 done
 
 if [[ $FS_SIP_CAPTURE_SERVER != "false" ]]; then
-  sed -i -e 's/.*<param name="capture-server".*/<param name="capture-server" value="$${FS_SIP_CAPTURE_SERVER}"\/>/g' 
+  sed -i -e 's/.*<param name="capture-server".*/<param name="capture-server" value="$${FS_SIP_CAPTURE_SERVER}"\/>/g' /etc/freeswitch/autoload_configs/sofia.conf.xml
 fi
 
 exec "${@}"
