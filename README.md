@@ -36,5 +36,5 @@ docker run --rm -it -p 7480:7480 fsd:latest
 ## Example changing port and password:
 
 ```
-docker run --rm -it -p 5480:5480 -e "FS_WS_PORT=5480" -e "FS_XMLRPC_PASSWORD=TEST" fsd:latest
+docker run --rm -it -p 5480:5480 -e "FS_WS_PORT=5480" -e "FS_XMLRPC_PASSWORD=TEST" readytalk/freeswitch-docker:latest
 ```
