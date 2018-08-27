@@ -10,12 +10,22 @@ DEFAULT_FS_SIP_PORT=5060
 DEFAULT_FS_TLS_PORT=5061
 DEFAULT_FS_EVENT_PORT=8020
 DEFAULT_FS_XMLRPC_PORT=8080
+DEFAULT_FS_RTP_START_PORT=16384
+DEFAULT_FS_RTP_END_PORT=32768
+DEFAULT_FS_RTP_PORT_CHECK="true"
+DEFAULT_FS_SESSION_PER_SECOND=30
+DEFAULT_FS_MAX_SESSION=1000
 DEFAULT_FS_EXT_RTP_IP="$\\\${local_ip_v4}"
 DEFAULT_FS_EXT_SIP_IP="$\\\${local_ip_v4}"
 DEFAULT_FS_XMLRPC_USER=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 DEFAULT_FS_XMLRPC_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 DEFAULT_FS_SIP_CAPTURE="no"
 DEFAULT_FS_SIP_CAPTURE_SERVER="false"
+DEFAULT_FS_MOD_ENABLE_XML_CDR="true"
+DEFAULT_FS_MOD_ENABLE_VERTO="false"
+DEFAULT_FS_MOD_ENABLE_VOICEMAIL="false"
+DEFAULT_FS_MOD_ENABLE_DIALPLAN_ASTERISK="false"
+DEFAULT_FS_MOD_ADD_JSON_CDR="true"
 
 rm -rf /etc/freeswitch/envVars/*
 for var in ${!DEFAULT_FS*}; do
@@ -29,11 +39,28 @@ for var in ${!DEFAULT_FS*}; do
   fi
 done
 
+
 echo -e "[default]\npassword=${DEFAULT_FS_EVENT_PASSWORD}\nport=${DEFAULT_FS_EVENT_PORT}\n" > /etc/fs_cli.conf
 
 
 for var in ${!FS_*}; do
-  if [[ $var == FS_* ]]; then
+  if [[ $var == FS_MOD_ENABLE_* ]]; then
+    var1=${var#FS_MOD_ENABLE_*}
+    var2=${var1,,}
+    var3="mod_${var2}"
+    if [[ "${!var}" == "true" ]]; then
+      sed -i -e "s/.*<load module=\"${var3}\"\/>.*/<load module=\"${var3}\"\/>/g" /etc/freeswitch/autoload_configs/modules.conf.xml
+    else 
+      sed -i -e "s/.*<load module=\"${var3}\"\/>.*/<!--<load module=\"${var3}\"\/>-->/g" /etc/freeswitch/autoload_configs/modules.conf.xml
+    fi
+  elif [[ $var == FS_MOD_ADD_* ]]; then
+    var1=${var#FS_MOD_ADD_*}
+    var2=${var1,,}
+    var3="mod_${var2}"
+    if [[ "${!var}" == "true" ]]; then
+      sed -i -e "s/.*<\/modules>.*/<load module=\"${var3}\"\/>\n<\/modules>/g" /etc/freeswitch/autoload_configs/modules.conf.xml
+    fi
+  elif [[ $var == FS_* ]]; then
     echo "<X-PRE-PROCESS cmd=\"set\" data=\"${var}=${!var}\"/>" > "/etc/freeswitch/envVars/${var}.xml"
   fi
 done

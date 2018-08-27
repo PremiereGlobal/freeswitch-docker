@@ -30,6 +30,7 @@ COPY configs/sip-profile.xml /etc/freeswitch/sip_profiles/
 COPY configs/sip-dialplan.xml /etc/freeswitch/dialplan/
 #add generic conference config
 COPY configs/conference.conf.xml /etc/freeswitch/autoload_configs/
+COPY configs/json_cdr.conf.xml /etc/freeswitch/autoload_configs/
 #add run.sh
 COPY run.sh /
 RUN touch /env.sh
