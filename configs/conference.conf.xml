@@ -20,6 +20,7 @@
       <param name="caller-id-name" value="$${outbound_caller_name}"/>
       <param name="caller-id-number" value="$${outbound_caller_id}"/>
       <param name="comfort-noise" value="false"/>
+      <param name="video-mode" value="passthrough"/>
     </profile>
 
   </profiles>

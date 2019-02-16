@@ -18,8 +18,8 @@
     <param name="rtp-timer-name" value="soft"/>
     <param name="local-network-acl" value="localnet.auto"/>
     <param name="manage-presence" value="false"/>
-    <param name="inbound-codec-prefs" value="OPUS,G722,PCMU,PCMA"/>
-    <param name="outbound-codec-prefs" value="OPUS,G722,PCMU,PCMA"/>
+    <param name="inbound-codec-prefs" value="OPUS,G722,PCMU,PCMA,H264,VP9,VP8"/>
+    <param name="outbound-codec-prefs" value="OPUS,G722,PCMU,PCMA,H264,VP9,VP8"/>
     <param name="nonce-ttl" value="60"/>
     <param name="auth-calls" value="false"/>
     <param name="disable-transcoding" value="true"/>
