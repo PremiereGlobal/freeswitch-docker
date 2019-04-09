@@ -1,0 +1,80 @@
+FROM ubuntu:18.04 as builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get -y update
+RUN apt-get -y --assume-yes install bash build-essential cmake cpp curl debconf-utils g++ gcc git git-core libio-stringy-perl \
+liblua5.1 liblua5.1-dev libluabind-dev libmysql++ libperl-dev libperl5i-perl libmysqlclient-dev \
+minizip lua5.1 make mariadb-client open-vm-tools unzip uuid-dev wget minizip zlibc libjson-perl libssl-dev \
+autoconf libjpeg-dev libsqlite3-dev libcurl4-openssl-dev libpcre++-dev libspeexdsp-dev libspeex-dev libavcodec-dev libavformat-dev \
+libldns-dev libedit-dev libtiff-dev yasm libopus-dev libopus0 opus-tools libsndfile1 libsndfile-dev \
+libasound2 libasound2-dev libavresample3 libavresample-dev libswscale4 libswscale-dev libpq5 libpq-dev \
+libcodec2-0.7 libcodec2-dev libopencv-dev erlang erlang-dev libmagickcore-dev openjdk-8-jdk openjdk-8-source \
+libpython-all-dev python-dev libldap-2.4-2 libldap2-dev libmemcached11 libmemcached-dev libmp4v2-2 libmp4v2-dev \
+libgdbm-dev libgdbm-compat-dev libdb-dev bison portaudio19-dev libshout3 libshout3-dev libmpg123-0 libmpg123-dev \
+libmp3lame0 libmp3lame-dev libvorbis0a libvorbis-dev libsmpp34-0 libsmpp34-dev libsnmp-dev libvlc5 libvlc-dev \
+libyaml-0-2 libyaml-dev
+RUN git clone --branch v1.8 --depth 1 https://freeswitch.org/stash/scm/fs/freeswitch.git
+#RUN git checkout v1.8
+#RUN apt-get -y install libssl1.0-dev libpt-dev libpt2.10.11
+#RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+#RUN depot_tools/fetch v8
+#WORKDIR /v8
+#RUN ../depot_tools/gclient sync
+#RUN ./build/install-build-deps.sh
+#RUN tools/dev/gm.py x64.release
+
+
+WORKDIR /freeswitch
+RUN ./bootstrap.sh
+RUN sed -i -e 's/mod_signalwire//g' modules.conf
+RUN sed -i -e 's/#event_handlers\/mod_json_cdr/event_handlers\/mod_json_cdr/g' modules.conf
+RUN sed -i -e 's/#languages\/mod_python/event_handlers\/languages\/mod_python/g' modules.conf
+#RUN sed -i -e 's/#languages\/mod_v8/event_handlers\/languages\/mod_v8/g' modules.conf
+
+RUN ./configure --prefix=/opt/freeswitch --enable-core-pgsql-support --with-java=/usr/lib/jvm/java-8-openjdk-amd64 --enable-optimization
+RUN make -j 10
+RUN make install
+
+FROM ubuntu:18.04
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update --fix-missing
+RUN apt-get -y --assume-yes dist-upgrade
+RUN apt-get -y --assume-yes install bash libmysqlclient20 minizip lua5.1 \
+unzip libuuid1 curl wget zlibc libjson-perl libjpeg8 libsqlite3-0 sqlite3 libcurl4 libspeexdsp1 \
+libspeex1 libldns2 libedit2 libtiff5 libopus0 opus-tools libsndfile1 \
+#libavcodec57 libavformat57 libswscale4 libmagickcore-6.q16-3 libldap-2.4-2 \
+libpq5 libcodec2-0.7 liblua5.2 \
+libldap-2.4-2 libmemcached11 libmp4v2-2 libgdbm5 libdb5.3 libportaudio2 libshout3 \
+libmpg123-0 libmp3lame0 libvorbis0a libsmpp34-0 libsnmp30 libyaml-0-2 dumb-init && apt-get clean autoclean && \
+apt-get autoremove --yes && \
+rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+COPY --from=builder /opt/freeswitch /opt/freeswitch
+
+RUN ln -s /opt/freeswitch/etc/freeswitch /etc/freeswitch
+RUN ln -s /opt/freeswitch/var/log/freeswitch /var/log/freeswitch
+RUN ln -s /opt/freeswitch/bin/fs_cli /usr/bin/fs_cli
+
+COPY configs/updatefs.sh /
+RUN /updatefs.sh
+RUN rm /updatefs.sh
+#add generic profile
+COPY configs/sip-profile.xml /etc/freeswitch/sip_profiles/
+#add generic config
+COPY configs/sip-dialplan.xml /etc/freeswitch/dialplan/
+#add generic conference config
+COPY configs/conference.conf.xml /etc/freeswitch/autoload_configs/
+COPY configs/json_cdr.conf.xml /etc/freeswitch/autoload_configs/
+
+RUN apt-get clean autoclean && \
+apt-get autoremove --yes && \
+rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+
+
+COPY run.sh /
+RUN touch /env.sh
+
+ENTRYPOINT ["/run.sh"]
+CMD ["/opt/freeswitch/bin/freeswitch", "-nonat", "-nf", "-nc"]
+
