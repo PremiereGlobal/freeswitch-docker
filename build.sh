@@ -68,8 +68,8 @@ if [[ ${TRAVIS} && "${TRAVIS_BRANCH}" == "master" && -n $DOCKER_USERNAME && -n $
   docker push readytalk/freeswitch-docker:${FS_18_VERSION}
   docker push readytalk/freeswitch-docker:${FS_18_MM}
   docker push readytalk/freeswitch-docker:1.8-latest
-  readytalk/freeswitch-docker:${FS_18_DTLS_VERSION}
-  readytalk/freeswitch-docker:${FS_18_DTLS_MM}
-  readytalk/freeswitch-docker:1.8-DTLS-latest
+  docker push readytalk/freeswitch-docker:${FS_18_DTLS_VERSION}
+  docker push readytalk/freeswitch-docker:${FS_18_DTLS_MM}
+  docker push readytalk/freeswitch-docker:1.8-DTLS-latest
 fi
 
