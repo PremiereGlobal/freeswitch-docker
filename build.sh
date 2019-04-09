@@ -64,8 +64,12 @@ if [[ ${TRAVIS} && "${TRAVIS_BRANCH}" == "master" && -n $DOCKER_USERNAME && -n $
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   docker push readytalk/freeswitch-docker:${FS_16_VERSION}
   docker push readytalk/freeswitch-docker:${FS_16_MM}
+  docker push readytalk/freeswitch-docker:1.6-latest
   docker push readytalk/freeswitch-docker:${FS_18_VERSION}
   docker push readytalk/freeswitch-docker:${FS_18_MM}
-  docker push readytalk/freeswitch-docker:latest
+  docker push readytalk/freeswitch-docker:1.8-latest
+  readytalk/freeswitch-docker:${FS_18_DTLS_VERSION}
+  readytalk/freeswitch-docker:${FS_18_DTLS_MM}
+  readytalk/freeswitch-docker:1.8-DTLS-latest
 fi
 
