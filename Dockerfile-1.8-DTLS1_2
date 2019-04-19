@@ -14,6 +14,7 @@ libgdbm-dev libgdbm-compat-dev libdb-dev bison portaudio19-dev libshout3 libshou
 libmp3lame0 libmp3lame-dev libvorbis0a libvorbis-dev libsmpp34-0 libsmpp34-dev libsnmp-dev libvlc5 libvlc-dev \
 libyaml-0-2 libyaml-dev
 RUN git clone --branch v1.8 --depth 1 https://freeswitch.org/stash/scm/fs/freeswitch.git
+RUN sed -ie 's/hg->capt_id.data = htons(mr->mr_agent_id);/hg->capt_id.data = htonl(mr->mr_agent_id);/g' /freeswitch/libs/sofia-sip/libsofia-sip-ua/tport/tport_logging.c
 #RUN git checkout v1.8
 #RUN apt-get -y install libssl1.0-dev libpt-dev libpt2.10.11
 #RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
