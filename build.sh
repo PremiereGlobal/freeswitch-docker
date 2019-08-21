@@ -82,8 +82,8 @@ echo "Saved Tag \"readytalk/freeswitch-docker:${FS_110_buster_VERSION}\""
 echo "Saved Tag \"readytalk/freeswitch-docker:${FS_110_buster_MM}\""
 echo "-----------------------"
 
-#if [[ ${TRAVIS} && "${TRAVIS_BRANCH}" == "master" && -n $DOCKER_USERNAME && -n $DOCKER_PASSWORD ]]; then
-#  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+if [[ ${TRAVIS} && "${TRAVIS_BRANCH}" == "master" && -n $DOCKER_USERNAME && -n $DOCKER_PASSWORD ]]; then
+  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   docker push readytalk/freeswitch-docker:${FS_16_VERSION}
   docker push readytalk/freeswitch-docker:${FS_16_MM}
   docker push readytalk/freeswitch-docker:1.6-latest
@@ -96,5 +96,5 @@ echo "-----------------------"
   docker push readytalk/freeswitch-docker:${FS_110_buster_VERSION}
   docker push readytalk/freeswitch-docker:${FS_110_buster_MM}
   docker push readytalk/freeswitch-docker:1.10-buster-latest
-#fi
+fi
 
