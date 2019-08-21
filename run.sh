@@ -42,7 +42,7 @@ for var in ${!DEFAULT_FS*}; do
 done
 
 
-echo -e "[default]\npassword=${DEFAULT_FS_EVENT_PASSWORD}\nport=${DEFAULT_FS_EVENT_PORT}\n" > /etc/fs_cli.conf
+echo -e "[default]\npassword=${FS_EVENT_PASSWORD}\nport=${FS_EVENT_PORT}\n" > /etc/fs_cli.conf
 
 
 for var in ${!FS_*}; do
