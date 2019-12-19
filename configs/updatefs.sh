@@ -4,7 +4,7 @@ rm -rf /etc/freeswitch/sip_profiles/*
 rm -rf /etc/freeswitch/dialplan/*
 
 #configure default password
-sed -i -e 's/.*<X-PRE-PROCESS cmd="set" data="default_password=1234"\/>.*/<X-PRE-PROCESS cmd="set" data="default_password=$${FS_DEFAULT_PASSWD}"\/>/g' /etc/freeswitch/vars.xml
+sed -i -e 's/.*<X-PRE-PROCESS cmd="set" data="default_password=1234"\/>.*/<X-PRE-PROCESS cmd="set" data="default_password=$${FS_DEFAULT_PASSWORD}"\/>/g' /etc/freeswitch/vars.xml
 #configure aws IP (will be "" if not in aws)
 sed -i '1 a <X-PRE-PROCESS cmd="exec-set" data="external_aws_ip=curl -s http://169.254.169.254/latest/meta-data/public-ipv4"/>' /etc/freeswitch/vars.xml
 #add vars include dir
