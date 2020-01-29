@@ -28,6 +28,7 @@ DEFAULT_FS_MOD_ENABLE_VOICEMAIL="false"
 DEFAULT_FS_MOD_ENABLE_DIALPLAN_ASTERISK="false"
 DEFAULT_FS_MOD_ENABLE_AV="true"
 DEFAULT_FS_MOD_ADD_JSON_CDR="true"
+DEFAULT_FS_SQLITE_MEMORY="false"
 
 rm -rf /etc/freeswitch/envVars/*
 for var in ${!DEFAULT_FS*}; do
@@ -69,6 +70,10 @@ done
 
 if [[ $FS_SIP_CAPTURE_SERVER != "false" ]]; then
   sed -i -e 's/.*<param name="capture-server".*/<param name="capture-server" value="$${FS_SIP_CAPTURE_SERVER}"\/>/g' /etc/freeswitch/autoload_configs/sofia.conf.xml
+fi
+
+if [[ $FS_SQLITE_MEMORY != "false" ]]; then
+  sed -i -e 's/.*<!-- <param name="core-db-dsn" value="dsn:username:password" \/> -->.*/<param name="core-db-dsn" value="sqlite:\/\/memory:\/\/core.db" \/>/g' /etc/freeswitch/autoload_configs/switch.conf.xml
 fi
 
 exec "${@}"

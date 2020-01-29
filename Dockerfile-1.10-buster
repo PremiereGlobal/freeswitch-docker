@@ -33,6 +33,7 @@ COPY configs/json_cdr.conf.xml /etc/freeswitch/autoload_configs/
 COPY run.sh /
 RUN touch /env.sh
 
+ENV FS_SQLITE_MEMORY="true"
 
 ENTRYPOINT ["/run.sh"]
 CMD ["/usr/bin/freeswitch", "-nonat", "-nf", "-nc"]
