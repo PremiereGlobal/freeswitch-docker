@@ -11,7 +11,6 @@ curl -k -L https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_
 chmod 755 /usr/bin/dumb-init && \
 curl -k -L  https://github.com/lwahlmeier/sip-ping/releases/download/v1.0.0/sip-ping-linux-amd64 > /usr/bin/sip-ping && \
 chmod 755 /usr/bin/sip-ping && \
-apt-get remove --purge -y --force-yes curl && \
 apt-get clean autoclean && \
 apt-get autoremove --yes && \
 rm -rf /var/lib/{apt,dpkg,cache,log}/
