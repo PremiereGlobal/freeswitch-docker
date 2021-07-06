@@ -21,8 +21,7 @@ rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 #run config changes
 COPY configs/updatefs.sh /
-RUN /updatefs.sh
-RUN rm /updatefs.sh
+RUN cp -r /etc/freeswitch /etc/orig_fs_config && /updatefs.sh && rm /updatefs.sh
 
 #add generic profile
 COPY configs/sip-profile.xml /etc/freeswitch/sip_profiles/

@@ -54,13 +54,11 @@ rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 COPY --from=builder /opt/freeswitch /opt/freeswitch
 
-RUN ln -s /opt/freeswitch/etc/freeswitch /etc/freeswitch
-RUN ln -s /opt/freeswitch/var/log/freeswitch /var/log/freeswitch
-RUN ln -s /opt/freeswitch/bin/fs_cli /usr/bin/fs_cli
+RUN ln -s /opt/freeswitch/etc/freeswitch /etc/freeswitch && ln -s /opt/freeswitch/var/log/freeswitch /var/log/freeswitch && ln -s /opt/freeswitch/bin/fs_cli /usr/bin/fs_cli
 
 COPY configs/updatefs.sh /
-RUN /updatefs.sh
-RUN rm /updatefs.sh
+RUN cp -r /etc/freeswitch /etc/orig_fs_config && /updatefs.sh && rm /updatefs.sh
+
 #add generic profile
 COPY configs/sip-profile.xml /etc/freeswitch/sip_profiles/
 #add generic config
@@ -72,7 +70,6 @@ COPY configs/json_cdr.conf.xml /etc/freeswitch/autoload_configs/
 RUN apt-get clean autoclean && \
 apt-get autoremove --yes && \
 rm -rf /var/lib/{apt,dpkg,cache,log}/
-
 
 
 COPY run.sh /

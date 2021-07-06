@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ReadyTalk/kamailio-docker.svg?branch=master)](https://travis-ci.org/ReadyTalk/kamailio-docker)
+[![Build Status](https://github.com/PremiereGlobal/freeswitch-docker/actions/workflows/build-image.yaml/badge.svg?branch=master)]
 
 # Docker Freeswitch Image
 
