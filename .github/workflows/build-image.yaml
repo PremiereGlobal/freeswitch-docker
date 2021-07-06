@@ -2,6 +2,8 @@ name: ci
 on:
   push:
     branches: actions-test
+  schedule:
+  - cron: "30 1 * * 0"
 jobs:
   build-and-publish:
     runs-on: ubuntu-20.04
@@ -13,6 +15,8 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_TOKEN }}
-    - name: build and publish
-      run: ./latestbuild.sh
+    - name: build and publish latest
+      run: ./build-latest.sh
+    - name: build and publish 1.8-DTLS1_2
+      run: ./build-1.8-DTLS1_2.sh
       
